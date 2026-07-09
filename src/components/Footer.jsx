@@ -4,8 +4,7 @@ import {
   Phone, 
   Mail, 
   MapPin, 
-  Clock, 
-  Calendar
+  Clock
 } from 'lucide-react';
 import { treatments } from '../data/treatments';
 
@@ -22,7 +21,7 @@ export default function Footer() {
           <div className="flex items-center gap-3">
             <div className="p-1 bg-white rounded-xl border border-primary/10 shadow-sm shrink-0">
               <img 
-                src="/images/clinic_logo.png" 
+                src={`${import.meta.env.BASE_URL}images/clinic_logo.png`} 
                 alt="Gulati Physiotherapy Logo" 
                 className="w-9 h-9 object-contain" 
               />
@@ -99,13 +98,13 @@ export default function Footer() {
               <Link to="/" className="hover:text-accent transition duration-200">Home</Link>
             </li>
             <li>
-              <Link to="/about-doctor" className="hover:text-accent transition duration-200">About Us</Link>
+              <Link to="/about-doctor" className="hover:text-accent transition duration-200">About</Link>
+            </li>
+            <li>
+              <a href="/#treatments" className="hover:text-accent transition duration-200">Treatments</a>
             </li>
             <li>
               <Link to="/gallery" className="hover:text-accent transition duration-200">Gallery</Link>
-            </li>
-            <li>
-              <Link to="/testimonials" className="hover:text-accent transition duration-200">Testimonials</Link>
             </li>
             <li>
               <Link to="/contact" className="hover:text-accent transition duration-200">Contact</Link>
@@ -137,7 +136,7 @@ export default function Footer() {
             </li>
             <li className="flex gap-2.5 items-center">
               <Phone className="w-4 h-4 text-accent shrink-0" />
-              <a href="tel:+919725565740" className="hover:text-accent transition">+91 97255 65740</a>
+              <a href="tel:+917737465987" className="hover:text-accent transition">+91 77374 65987</a>
             </li>
             <li className="flex gap-2.5 items-center">
               <Mail className="w-4 h-4 text-accent shrink-0" />
@@ -163,14 +162,23 @@ export default function Footer() {
               ></iframe>
             </div>
 
-            <div className="pt-3">
-              <Link
-                to="/book-appointment"
-                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs font-bold rounded-xl transition duration-300"
+            <div className="pt-3 space-y-2">
+              <a
+                href="tel:+917737465987"
+                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 bg-white text-primary border border-primary/20 hover:bg-primary/5 text-xs font-bold rounded-xl transition duration-300"
               >
-                <Calendar className="w-4 h-4" />
-                Book Appointment
-              </Link>
+                <Phone className="w-4 h-4" />
+                Call Helpline
+              </a>
+              <a
+                href="https://wa.me/917737465987?text=Hello%2C%20I%20want%20to%20book%20an%20appointment."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 w-full justify-center px-4 py-2.5 bg-accent hover:bg-accent-hover text-white text-xs font-bold rounded-xl transition duration-300 shadow-soft"
+              >
+                <Phone className="w-4 h-4" />
+                WhatsApp Appointment
+              </a>
             </div>
           </div>
         </div>
@@ -179,13 +187,19 @@ export default function Footer() {
 
       {/* Bottom Bar */}
       <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-teal-900 text-xs text-teal-300/60 flex flex-col md:flex-row justify-between items-center gap-4">
-        <div>
-          &copy; {new Date().getFullYear()} Gulati Physiotherapy Clinic. All rights reserved.
+        <div className="flex flex-col sm:flex-row items-center gap-2 text-center sm:text-left">
+          <span>&copy; {new Date().getFullYear()} Gulati Physiotherapy Clinic. All rights reserved.</span>
+          <span className="hidden sm:inline text-teal-300/30">|</span>
+          <span>
+            Made with <a href="https://rightads.in" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-semibold transition">Right Ads Digital</a>
+          </span>
         </div>
-        <div className="flex flex-wrap justify-center gap-6">
-          <Link to="/privacy-policy" className="hover:text-accent transition">Privacy Policy</Link>
-          <Link to="/terms-of-service" className="hover:text-accent transition">Terms of Service</Link>
-          <Link to="/warranties-and-guarantees" className="hover:text-accent transition">Warranties & Guarantees</Link>
+        <div className="flex flex-wrap justify-center gap-6 text-sm">
+          <Link to="/" className="hover:text-accent transition">Home</Link>
+          <Link to="/about-doctor" className="hover:text-accent transition">About</Link>
+          <a href="/#treatments" className="hover:text-accent transition">Treatments</a>
+          <Link to="/gallery" className="hover:text-accent transition">Gallery</Link>
+          <Link to="/contact" className="hover:text-accent transition">Contact</Link>
         </div>
       </div>
     </footer>

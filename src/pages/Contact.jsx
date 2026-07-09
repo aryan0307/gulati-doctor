@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, Phone, MapPin, Clock, Mail, Send, CheckCircle } from 'lucide-react';
 
 export default function Contact() {
-  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
+  const [formData, setFormData] = useState({ name: '', phone: '', message: '' });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -15,11 +15,6 @@ export default function Contact() {
       tempErrors.phone = "Phone number is required.";
     } else if (!/^\+?[0-9\s-]{10,15}$/.test(formData.phone)) {
       tempErrors.phone = "Please enter a valid phone number (10-15 digits).";
-    }
-    if (!formData.email.trim()) {
-      tempErrors.email = "Email address is required.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      tempErrors.email = "Please enter a valid email address.";
     }
     if (!formData.message.trim()) tempErrors.message = "Message content is required.";
     
@@ -41,36 +36,43 @@ export default function Contact() {
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate API request
+    
+    // Generate formatted WhatsApp message
+    const formattedText = `Hello, I want to book an appointment.\n\nName: ${formData.name}\nPhone: ${formData.phone}\nMessage: ${formData.message}`;
+    const encodedText = encodeURIComponent(formattedText);
+    const whatsappUrl = `https://wa.me/917737465987?text=${encodedText}`;
+
+    // Open WhatsApp in a new tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
+    setFormData({ name: '', phone: '', message: '' });
+    
+    // Auto clear success banner after 5 seconds
     setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({ name: '', phone: '', email: '', message: '' });
-      
-      // Auto clear success banner after 5 seconds
-      setTimeout(() => {
-        setSubmitSuccess(false);
-      }, 5000);
-    }, 1500);
+      setSubmitSuccess(false);
+    }, 5000);
   };
 
   return (
     <div className="bg-brand-bg min-h-screen font-sans text-text-main relative">
       
       {/* 1. PAGE TITLE BANNER */}
-      <section className="bg-linear-to-r from-teal-100 to-teal-50/50 py-12 px-6 border-b border-primary/10 relative overflow-hidden">
-        {/* Subtle background grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#0d9488_1px,transparent_1px)] bg-size-[16px_16px]"></div>
+      <section className="relative min-h-[380px] md:min-h-[420px] flex items-center bg-cover bg-center py-16 px-6 text-white overflow-hidden" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/clinic_exterior.jpg')` }}>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent"></div>
         
-        <div className="max-w-4xl mx-auto space-y-4 relative z-10 text-left">
+        <div className="w-full max-w-4xl mx-auto space-y-4 relative z-10 text-left">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-1.5 text-xs text-text-secondary font-medium">
-            <Link to="/" className="hover:text-primary transition">Home</Link>
-            <ChevronRight className="w-3 h-3 text-text-secondary/50" />
-            <span className="text-primary font-semibold">Contact</span>
+          <nav className="flex items-center gap-1.5 text-xs text-teal-200 font-medium">
+            <Link to="/" className="hover:text-white transition">Home</Link>
+            <ChevronRight className="w-3 h-3 text-teal-200/50" />
+            <span className="text-white font-semibold">Contact</span>
           </nav>
           
-          <h1 className="text-3xl md:text-4xl font-serif font-extrabold text-primary-darker tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
             Contact Gulati Physiotherapy Clinic
           </h1>
         </div>
@@ -106,10 +108,10 @@ export default function Contact() {
                     <span className="text-xs font-semibold text-text-secondary uppercase tracking-widest">Call & WhatsApp Helpline</span>
                     <div>
                       <a 
-                        href="tel:+919725565740" 
+                        href="tel:+917737465987" 
                         className="text-xl md:text-2xl font-serif font-bold text-primary hover:text-primary-hover transition duration-200"
                       >
-                        +91 97255 65740
+                        +91 77374 65987
                       </a>
                     </div>
                   </div>
@@ -176,7 +178,7 @@ export default function Contact() {
                 Send us a Message
               </h3>
               <p className="text-xs md:text-sm text-text-secondary">
-                Have a question or looking to consult? Drop your details and we will get back to you.
+                Have a question or looking to consult? Drop your details and we will connect via WhatsApp.
               </p>
             </div>
 
@@ -184,7 +186,7 @@ export default function Contact() {
             {submitSuccess && (
               <div className="bg-emerald-50 border border-emerald-200 text-emerald-800 p-4 rounded-xl flex items-center gap-3 animate-fade-in">
                 <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span className="text-xs md:text-sm font-semibold">Thank you! We'll get back to you soon.</span>
+                <span className="text-xs md:text-sm font-semibold">Thank you! Opening WhatsApp to send your message.</span>
               </div>
             )}
 
@@ -221,20 +223,6 @@ export default function Contact() {
 
               </div>
 
-              {/* Email Address */}
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-text-main uppercase tracking-wider" htmlFor="email">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  placeholder="e.g. yourname@example.com"
-                  className={`w-full px-4 py-3 text-sm rounded-xl border ${errors.email ? 'border-red-500' : 'border-primary/10'} focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-brand-bg`}
-                />
-                {errors.email && <p className="text-xs text-red-500 font-semibold">{errors.email}</p>}
-              </div>
-
               {/* Message */}
               <div className="space-y-1.5">
                 <label className="text-xs font-bold text-text-main uppercase tracking-wider" htmlFor="message">Your Message</label>
@@ -260,7 +248,7 @@ export default function Contact() {
                 ) : (
                   <>
                     <Send className="w-4 h-4" />
-                    Send Message
+                    Send via WhatsApp
                   </>
                 )}
               </button>
@@ -273,7 +261,7 @@ export default function Contact() {
       {/* 5. FLOATING MOBILE "CALL NOW" BUTTON */}
       <div className="sm:hidden fixed bottom-6 right-6 z-40">
         <a 
-          href="tel:+919725565740"
+          href="tel:+917737465987"
           className="w-14 h-14 bg-accent hover:bg-accent-hover text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 active:scale-95 border border-white/20"
           aria-label="Call clinic now"
         >

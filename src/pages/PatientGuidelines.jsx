@@ -25,21 +25,22 @@ export default function PatientGuidelines() {
     <div className="bg-brand-bg min-h-screen font-sans text-text-main">
       
       {/* 1. PAGE TITLE BANNER */}
-      <section className="bg-linear-to-r from-teal-100 to-teal-50/50 py-12 px-6 border-b border-primary/10 relative overflow-hidden">
-        {/* Subtle background grid pattern */}
-        <div className="absolute inset-0 opacity-[0.03] pointer-events-none bg-[radial-gradient(#0d9488_1px,transparent_1px)] [background-size:16px_16px]"></div>
+      <section className="relative min-h-[380px] md:min-h-[420px] flex items-center bg-cover bg-center py-16 px-6 text-white overflow-hidden" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/clinic_room.png')` }}>
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent"></div>
         
-        <div className="max-w-4xl mx-auto space-y-4 relative z-10 text-left">
+        <div className="w-full max-w-4xl mx-auto space-y-4 relative z-10 text-left">
           {/* Breadcrumbs */}
-          <nav className="flex items-center gap-1.5 text-xs text-text-secondary font-medium">
-            <Link to="/" className="hover:text-primary transition">Home</Link>
-            <ChevronRight className="w-3 h-3 text-text-secondary/50" />
-            <span className="text-text-secondary/80">Patient Info</span>
-            <ChevronRight className="w-3 h-3 text-text-secondary/50" />
-            <span className="text-primary font-semibold">Guidelines</span>
+          <nav className="flex items-center gap-1.5 text-xs text-teal-200 font-medium">
+            <Link to="/" className="hover:text-white transition">Home</Link>
+            <ChevronRight className="w-3 h-3 text-teal-200/50" />
+            <span className="text-teal-200">Patient Info</span>
+            <ChevronRight className="w-3 h-3 text-teal-200/50" />
+            <span className="text-white font-semibold">Guidelines</span>
           </nav>
           
-          <h1 className="text-3xl md:text-4xl font-serif font-extrabold text-primary-darker tracking-tight leading-tight">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
             Patient Pre-Session Guidelines
           </h1>
         </div>
@@ -61,12 +62,12 @@ export default function PatientGuidelines() {
             {guidelines.map((g, idx) => (
               <div 
                 key={idx}
-                className="bg-white p-8 rounded-2xl border border-primary/5 shadow-soft hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
+                className="group bg-white p-8 rounded-2xl border border-primary/5 shadow-soft hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
               >
                 <div className="space-y-6">
                   {/* Number Badge + Circular Icon */}
                   <div className="flex justify-between items-center">
-                    <div className="w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:text-white group-hover:scale-110">
                       {g.icon}
                     </div>
                     <span className="text-4xl font-serif font-extrabold text-primary/10">
@@ -106,13 +107,15 @@ export default function PatientGuidelines() {
                 Contact Us
               </Link>
               
-              <Link
-                to="/online-appointment"
+              <a
+                href="https://wa.me/917737465987?text=Hello%2C%20I%20want%20to%20book%20an%20appointment."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3 bg-accent hover:bg-accent-hover text-white font-bold rounded-xl shadow-soft hover:-translate-y-0.5 transition duration-300 text-sm w-full sm:w-auto text-center gap-1.5"
               >
-                Book Appointment
+                WhatsApp Appointment
                 <ArrowRight className="w-4 h-4" />
-              </Link>
+              </a>
             </div>
           </div>
 

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Activity, ShieldCheck, Heart, Calendar } from 'lucide-react';
+import { Activity, ShieldCheck, Heart, Phone } from 'lucide-react';
 import * as Icons from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -84,14 +83,23 @@ export default function TreatmentTemplate({ treatment }) {
           <p className="text-teal-100 max-w-lg mx-auto text-sm">
             Schedule a comprehensive assessment with Dr. Vinay Gulati at our clinic in Talwandi, Kota.
           </p>
-          <div className="pt-2">
-            <Link
-              to="/book-appointment"
+          <div className="pt-2 flex flex-col sm:flex-row justify-center items-center gap-4">
+            <a
+              href="tel:+917737465987"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-primary border border-primary/20 hover:bg-primary/5 font-semibold rounded-xl transition duration-300"
+            >
+              <Phone className="w-5 h-5" />
+              Call Now
+            </a>
+            <a
+              href="https://wa.me/917737465987?text=Hello%2C%20I%20want%20to%20book%20an%20appointment."
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-accent text-white font-semibold rounded-xl hover:bg-accent-hover transition duration-300 shadow-lg shadow-accent/25"
             >
-              <Calendar className="w-5 h-5" />
-              Book Appointment Now
-            </Link>
+              <Phone className="w-5 h-5" />
+              WhatsApp Appointment
+            </a>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, MessageSquare, X, Calendar } from 'lucide-react';
+import { Phone, MessageSquare, X } from 'lucide-react';
 
 export default function FloatingContactBox() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function FloatingContactBox() {
           <div className="p-6 space-y-4">
             {/* Phone */}
             <a
-              href="tel:+919725565740"
+              href="tel:+917737465987"
               className="flex items-center gap-3 p-3 bg-white/10 hover:bg-accent/20 rounded-xl transition duration-200 group"
             >
               <div className="w-10 h-10 rounded-lg bg-accent/30 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition">
@@ -36,13 +36,13 @@ export default function FloatingContactBox() {
               </div>
               <div>
                 <p className="text-xs text-teal-100 font-medium">Call Us</p>
-                <p className="text-sm font-bold text-white">+91 97255 65740</p>
+                <p className="text-sm font-bold text-white">+91 77374 65987</p>
               </div>
             </a>
 
             {/* WhatsApp */}
             <a
-              href="https://wa.me/919725565740?text=Hi%20Gulati%20Clinic%2C%20I%20need%20more%20information"
+              href="https://wa.me/917737465987?text=Hi%20Gulati%20Clinic%2C%20I%20need%20more%20information"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 p-3 bg-white/10 hover:bg-accent/20 rounded-xl transition duration-200 group"
@@ -56,13 +56,15 @@ export default function FloatingContactBox() {
               </div>
             </a>
 
-            {/* Book Appointment CTA */}
+            {/* WhatsApp Appointment CTA */}
             <a
-              href="/book-appointment"
+              href="https://wa.me/917737465987?text=Hello%2C%20I%20want%20to%20book%20an%20appointment."
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center justify-center gap-2 p-3 bg-linear-to-r from-accent to-accent/80 hover:from-accent hover:to-accent rounded-xl transition duration-200 text-white font-bold text-sm shadow-lg hover:shadow-xl transform hover:scale-105"
             >
-              <Calendar className="w-4 h-4" />
-              Book Appointment
+              <Phone className="w-4 h-4" />
+              WhatsApp Appointment
             </a>
 
             {/* Quick Info */}
