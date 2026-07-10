@@ -93,7 +93,7 @@ export default function FloatingContactBox() {
                 <p className="text-xs text-teal-200 text-center leading-relaxed">
                   📍 <span className="font-semibold">Open Mon-Sat</span><br />
                   8:00 AM - 8:00 PM<br />
-                  <span className="text-accent">Near Suvi Eye Hospital, Kota</span>
+                  <span className="text-accent">4W15, Sector - 4, Talwandi, Kota</span>
                 </p>
               </div>
             </div>

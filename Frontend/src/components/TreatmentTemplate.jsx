@@ -1,6 +1,5 @@
 import { Activity, ShieldCheck, Heart, Phone } from 'lucide-react';
 import * as Icons from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 export default function TreatmentTemplate({ treatment }) {
   if (!treatment) return <div className="p-8 text-center">Treatment not found</div>;
@@ -12,16 +11,30 @@ export default function TreatmentTemplate({ treatment }) {
     <div className="bg-brand-bg min-h-screen py-16 px-6 text-text-main font-sans">
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Treatment Hero */}
-        <div className="bg-white p-8 md:p-12 rounded-3xl border border-primary/5 shadow-soft text-left flex flex-col md:flex-row gap-8 items-start md:items-center">
-          <div className="p-4 bg-primary/10 text-primary rounded-2xl">
-            <IconComponent className="w-12 h-12" />
-          </div>
-          <div className="space-y-3 flex-1">
-            <span className="text-xs bg-accent/15 text-accent font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
-              Specialized Treatment
-            </span>
-            <h1 className="text-3xl md:text-5xl font-bold font-serif text-primary-darker">{treatment.name}</h1>
-            <p className="text-text-secondary leading-relaxed max-w-xl">
+        <div className="bg-white p-6 md:p-8 rounded-3xl border border-primary/5 shadow-soft text-left flex flex-col md:flex-row gap-8 items-stretch">
+          {/* Left: Illustrative Treatment Image */}
+          {treatment.image && (
+            <div className="w-full md:w-80 h-52 md:h-auto overflow-hidden rounded-2xl border border-primary/10 shadow-sm shrink-0 relative">
+              <img 
+                src={`${import.meta.env.BASE_URL}${treatment.image}`} 
+                alt={treatment.name} 
+                className={`w-full h-full object-cover ${treatment.align || 'object-center'}`}
+              />
+              {/* Floating Badge/Icon over Image */}
+              <div className="absolute top-4 left-4 bg-white/95 backdrop-blur w-10 h-10 rounded-xl border border-primary/10 shadow-soft flex items-center justify-center text-primary z-10">
+                <IconComponent className="w-5 h-5" />
+              </div>
+            </div>
+          )}
+          
+          <div className="space-y-4 flex-1 flex flex-col justify-center">
+            <div>
+              <span className="text-xs bg-accent/15 text-accent font-semibold px-3 py-1 rounded-full uppercase tracking-wider">
+                Specialized Treatment
+              </span>
+            </div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-serif text-primary-darker">{treatment.name}</h1>
+            <p className="text-text-secondary leading-relaxed max-w-xl text-sm md:text-base">
               {treatment.shortDescription}
             </p>
           </div>
@@ -81,7 +94,7 @@ export default function TreatmentTemplate({ treatment }) {
         <div className="bg-linear-to-tr from-primary-dark to-primary-darker p-8 md:p-12 rounded-3xl text-white text-center space-y-6 shadow-soft">
           <h2 className="text-2xl md:text-3xl font-bold font-serif">Ready to start your recovery for {treatment.name}?</h2>
           <p className="text-teal-100 max-w-lg mx-auto text-sm">
-            Schedule a comprehensive assessment with Dr. Vinay Gulati at our clinic in Talwandi, Kota.
+            Schedule a comprehensive assessment with Dr. Vinay Gulati at our clinic in 4W15, Sector - 4, Talwandi, Kota.
           </p>
           <div className="pt-2 flex flex-col sm:flex-row justify-center items-center gap-4">
             <a

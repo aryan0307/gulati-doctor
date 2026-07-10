@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // Premium easing functions inspired by Apple, Linear, Stripe
 export const easing = {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
-import { Shield, Award, ArrowRight, Activity, CheckCircle, Sparkles, MapPin, Users, Heart, Star, Phone, Clock, RotateCw, Monitor, FileText, ArrowLeft, Cpu, TrendingUp, Calendar } from 'lucide-react';
-import { ScrollReveal, variants, easing, PremiumButton } from '../lib/motion.jsx';
+import { motion, useInView } from 'framer-motion';
+import { Shield, Award, ArrowRight, Activity, CheckCircle, Sparkles, Heart, Phone, RotateCw, Monitor, FileText, Cpu, TrendingUp } from 'lucide-react';
+import { ScrollReveal, variants, easing } from '../lib/motion.jsx';
 
 // Custom animated counter component
 function AnimatedCounter({ value, duration = 2, suffix = "" }) {
@@ -40,37 +40,49 @@ export default function Home() {
       title: "Back & Spine Care",
       desc: "Specialized non-surgical treatment for disc herniations, sciatica, and chronic lower back strains.",
       icon: Shield,
-      path: "/treatments/back-spine-pain"
+      path: "/treatments/back-spine-pain",
+      image: `${import.meta.env.BASE_URL}images/doctor_real_adjust.jpg`,
+      align: "object-[center_20%]"
     },
     {
       title: "Joint & Knee Rehab",
       desc: "Comprehensive therapeutic programs restoring movement and strength post-injury or arthritis flare-ups.",
       icon: RotateCw,
-      path: "/treatments/joint-knee-rehab"
+      path: "/treatments/joint-knee-rehab",
+      image: `${import.meta.env.BASE_URL}images/doctor_real_adjust2.jpg`,
+      align: "object-[center_15%]"
     },
     {
       title: "Sports Injury Recovery",
       desc: "Accelerated athletic recovery regimes covering ligament tears, sprains, and kinetic chain imbalances.",
       icon: TrendingUp,
-      path: "/treatments/sports-injury"
+      path: "/treatments/sports-injury",
+      image: `${import.meta.env.BASE_URL}images/rehab_exercise.png`,
+      align: "object-[center_35%]"
     },
     {
       title: "Chiropractic Adjustment",
       desc: "Precise skeletal manipulation and spinal alignment to alleviate nerve compression and stiffness.",
       icon: Sparkles,
-      path: "/treatments/chiropractic-alignment"
+      path: "/treatments/chiropractic-alignment",
+      image: `${import.meta.env.BASE_URL}images/doctor_real_adjust4.jpg`,
+      align: "object-[center_20%]"
     },
     {
       title: "Stroke & Paralysis Recovery",
       desc: "Neuro-rehabilitation therapies engineered to trigger motor relearning, muscle tone stability, and independence.",
       icon: Heart,
-      path: "/treatments/stroke-paralysis"
+      path: "/treatments/stroke-paralysis",
+      image: `${import.meta.env.BASE_URL}images/clinic_staff_team.png`,
+      align: "object-[center_15%]"
     },
     {
       title: "Electrotherapy Treatments",
       desc: "Advanced biological currents including IFT, TENS, and ultrasonic thermal waves to block pain pathways.",
       icon: Cpu,
-      path: "/treatments/electrotherapy"
+      path: "/treatments/electrotherapy",
+      image: `${import.meta.env.BASE_URL}images/ultrasound_therapy.png`,
+      align: "object-[center_15%]"
     }
   ];
 
@@ -110,13 +122,18 @@ export default function Home() {
     <div className="bg-brand-bg min-h-screen text-text-main font-sans overflow-x-hidden">
       
       {/* 1. HERO SECTION */}
-      <ScrollReveal variant="fadeIn">
-        <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center bg-cover bg-center py-20 lg:py-32 px-6 text-white overflow-hidden" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hero.png')` }}>
-          {/* Dark Overlays */}
-          <div className="absolute inset-0 bg-primary-darker/40 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-darker/90 via-primary-darker/50 to-transparent"></div>
-          
-          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 relative z-10 w-full">
+      <section className="relative min-h-[600px] lg:min-h-[700px] flex items-center py-20 lg:py-32 px-6 text-white overflow-hidden">
+        {/* Animated Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0 animate-kenburns"
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/hero.png')` }}
+        />
+        {/* Dark Overlays */}
+        <div className="absolute inset-0 bg-primary-darker/40 mix-blend-multiply z-1"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-darker/90 via-primary-darker/50 to-transparent z-2"></div>
+        
+        <div className="w-full relative z-10">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12 w-full">
             {/* Left Text */}
             <div className="flex-1 space-y-6 text-left">
               <motion.span
@@ -207,63 +224,64 @@ export default function Home() {
                     <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                     Open Daily
                   </span>
-                  <span>Talwandi, Kota</span>
+                  <span>4W15, Sector - 4, Talwandi, Kota</span>
                 </div>
               </motion.div>
             </div>
           </div>
+        </div>
 
-          {/* Stats Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: easing.easeOutCubic, delay: 0.6 }}
-            className="absolute bottom-0 left-0 right-0 bg-primary-darker/65 backdrop-blur-md border-t border-white/10 py-6 px-6 z-25"
-          >
-            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-              {[
-                { value: "15", suffix: "+", label: "Years of Experience" },
-                { value: "5000", suffix: "+", label: "Happy Patients" },
-                { value: "15", suffix: "+", label: "Advanced Treatments" },
-                { value: "98", suffix: "%", label: "Recovery Success" }
-              ].map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, ease: easing.easeOutCubic, delay: 0.7 + idx * 0.1 }}
-                  className={`text-center space-y-0.5 ${idx > 0 ? 'border-l border-white/10' : ''}`}
-                >
-                  <div className="text-2xl md:text-3xl font-serif font-extrabold text-white">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  <p className="text-[10px] text-teal-200 uppercase tracking-widest font-bold">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </section>
-      </ScrollReveal>
+        {/* Stats Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: easing.easeOutCubic, delay: 0.6 }}
+          className="absolute bottom-0 left-0 right-0 bg-primary-darker/65 backdrop-blur-md border-t border-white/10 py-6 px-6 z-25"
+        >
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              { value: "15", suffix: "+", label: "Years of Experience" },
+              { value: "5000", suffix: "+", label: "Happy Patients" },
+              { value: "15", suffix: "+", label: "Advanced Treatments" },
+              { value: "98", suffix: "%", label: "Recovery Success" }
+            ].map((stat, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: easing.easeOutCubic, delay: 0.7 + idx * 0.1 }}
+                className={`text-center space-y-0.5 ${idx > 0 ? 'border-l border-white/10' : ''}`}
+              >
+                <div className="text-2xl md:text-3xl font-serif font-extrabold text-white">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </div>
+                <p className="text-[10px] text-teal-200 uppercase tracking-widest font-bold">{stat.label}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
 
       {/* 2. ABOUT SECTION */}
-      <ScrollReveal variant="slideUp" margin="-100px">
-        <section className="py-20 md:py-28 px-6 bg-white">
+      <section className="py-20 md:py-28 px-6 bg-white">
+        <ScrollReveal variant="slideUp" margin="-100px">
           <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
             
             {/* Left: Doctor image with floating badge */}
             <div className="flex-1 relative w-full max-w-md lg:max-w-none">
-              <motion.div
-                initial={{ opacity: 0, x: -40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, ease: easing.easeOutCubic }}
-                className="relative"
-              >
-                <img
-                  src={`${import.meta.env.BASE_URL}images/doctor_real_desk.jpg`}
-                  alt="Dr. Vinay Gulati"
-                  className="w-full aspect-4/5 object-cover object-[center_15%] rounded-3xl shadow-soft border border-primary/10"
-                />
+              <div className="relative">
+                <div className="overflow-hidden rounded-3xl border border-primary/10 shadow-soft">
+                  <motion.img
+                    src={`${import.meta.env.BASE_URL}images/doctor_real_desk.jpg`}
+                    alt="Dr. Vinay Gulati"
+                    className="w-full aspect-4/5 object-cover object-[center_15%]"
+                    initial={{ opacity: 0, scale: 1.08 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.04 }}
+                    transition={{ duration: 0.8, ease: easing.easeOutExpo }}
+                  />
+                </div>
                 
                 {/* Floating overlapping Badge */}
                 <motion.div
@@ -271,7 +289,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, scale: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, ease: easing.easeOutBack, delay: 0.3 }}
-                  className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-soft border border-primary/10 max-w-50 text-left"
+                  className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-soft border border-primary/10 max-w-50 text-left z-10"
                 >
                   <div className="w-10 h-10 bg-accent/15 text-accent rounded-xl flex items-center justify-center mb-2">
                     <Award className="w-5 h-5" />
@@ -279,7 +297,7 @@ export default function Home() {
                   <h4 className="font-serif font-bold text-base text-primary-dark leading-tight">15+ Years</h4>
                   <p className="text-xs text-text-secondary mt-1">Clinical Trust & Spine Expertise</p>
                 </motion.div>
-              </motion.div>
+              </div>
             </div>
 
             {/* Right: Text content */}
@@ -348,12 +366,12 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
-      </ScrollReveal>
+        </ScrollReveal>
+      </section>
 
       {/* 3. SERVICES/TREATMENTS SECTION */}
-      <ScrollReveal variant="slideUp" margin="-100px">
-        <section id="treatments" className="py-20 md:py-28 px-6 bg-[#F0FDFA]">
+      <section id="treatments" className="py-20 md:py-28 px-6 bg-[#F0FDFA]">
+        <ScrollReveal variant="slideUp" margin="-100px">
           <div className="max-w-7xl mx-auto space-y-12">
             
             <div className="text-center max-w-xl mx-auto space-y-4">
@@ -378,24 +396,34 @@ export default function Home() {
                   <motion.div key={idx} variants={variants.slideUp} transition={{ delay: idx * 0.08 }}>
                     <motion.div
                       whileHover={{ y: -8, transition: { duration: 0.3, ease: easing.easeOutCubic } }}
-                      className="bg-white p-8 rounded-2xl border border-primary/5 shadow-soft hover:shadow-md flex flex-col justify-between h-full text-left group"
+                      className="bg-white rounded-2xl border border-primary/5 shadow-soft hover:shadow-md flex flex-col justify-between h-full text-left group overflow-hidden"
                     >
-                      <div className="space-y-4">
-                        <motion.div
-                          whileHover={{ scale: 1.1, rotate: 2 }}
-                          className="w-12 h-12 rounded-full bg-primary/10 text-primary flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:text-white"
-                        >
-                          <IconComponent className="w-6 h-6" />
-                        </motion.div>
-                        <h3 className="font-serif font-bold text-xl text-primary-dark transition duration-300">
-                          {service.title}
-                        </h3>
-                        <p className="text-text-secondary text-sm leading-relaxed">
-                          {service.desc}
-                        </p>
+                      <div>
+                        {/* Top Image Container */}
+                        <div className="relative h-48 w-full overflow-hidden bg-teal-50/30 border-b border-primary/5">
+                          <img 
+                            src={service.image} 
+                            alt={service.title} 
+                            className={`w-full h-full object-cover ${service.align || 'object-center'} group-hover:scale-105 transition-transform duration-500`}
+                          />
+                          {/* Floating Badge/Icon over Image */}
+                          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur w-10 h-10 rounded-xl border border-primary/10 shadow-soft flex items-center justify-center text-primary z-10 transition-transform duration-300 group-hover:scale-110">
+                            <IconComponent className="w-5 h-5" />
+                          </div>
+                        </div>
+
+                        {/* Content text */}
+                        <div className="p-6 space-y-2">
+                          <h3 className="font-serif font-bold text-lg md:text-xl text-primary-dark group-hover:text-primary transition duration-300">
+                            {service.title}
+                          </h3>
+                          <p className="text-text-secondary text-sm leading-relaxed">
+                            {service.desc}
+                          </p>
+                        </div>
                       </div>
                       
-                      <div className="pt-6">
+                      <div className="px-6 pb-6 pt-2">
                         <Link
                           to={service.path}
                           className="inline-flex items-center gap-1.5 text-xs font-bold text-primary group-hover:text-accent transition duration-200 uppercase tracking-wider"
@@ -420,12 +448,12 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
-      </ScrollReveal>
+        </ScrollReveal>
+      </section>
 
       {/* 4. WHY CHOOSE US / STATS STRIP */}
-      <ScrollReveal variant="slideUp" margin="-100px">
-        <section className="py-16 px-6 bg-white border-y border-primary/5">
+      <section className="py-16 px-6 bg-white border-y border-primary/5">
+        <ScrollReveal variant="slideUp" margin="-100px">
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {highlights.map((item, idx) => {
               const IconComponent = item.icon;
@@ -449,12 +477,12 @@ export default function Home() {
               );
             })}
           </div>
-        </section>
-      </ScrollReveal>
+        </ScrollReveal>
+      </section>
 
       {/* 5. GALLERY PREVIEW */}
-      <ScrollReveal variant="slideUp" margin="-100px">
-        <section className="py-20 md:py-28 px-6 bg-brand-bg">
+      <section className="py-20 md:py-28 px-6 bg-brand-bg">
+        <ScrollReveal variant="slideUp" margin="-100px">
           <div className="max-w-7xl mx-auto space-y-12">
             
             <div className="text-center max-w-xl mx-auto space-y-4">
@@ -509,12 +537,12 @@ export default function Home() {
             </div>
 
           </div>
-        </section>
-      </ScrollReveal>
+        </ScrollReveal>
+      </section>
 
       {/* 6. APPOINTMENT CTA SECTION */}
-      <ScrollReveal variant="slideUp" margin="-100px">
-        <section className="py-20 px-6 bg-linear-to-tr from-primary-dark to-primary-darker text-white">
+      <section className="py-20 px-6 bg-linear-to-tr from-primary-dark to-primary-darker text-white">
+        <ScrollReveal variant="slideUp" margin="-100px">
           <div className="max-w-4xl mx-auto text-center space-y-8">
             <h2 className="text-3xl md:text-5xl font-bold font-serif leading-tight">
               Ready to Start Your Recovery Journey?
@@ -547,8 +575,8 @@ export default function Home() {
               </motion.a>
             </div>
           </div>
-        </section>
-      </ScrollReveal>
+        </ScrollReveal>
+      </section>
 
     </div>
   );

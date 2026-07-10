@@ -9,10 +9,15 @@ export default function AboutDoctor() {
     <div className="bg-brand-bg min-h-screen font-sans text-text-main">
       
       {/* 1. PAGE TITLE BANNER */}
-      <section className="relative min-h-[380px] md:min-h-[420px] flex items-center bg-cover bg-center py-16 px-6 text-white overflow-hidden" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/doctor_real_desk.jpg')` }}>
+      <section className="relative min-h-[380px] md:min-h-[420px] flex items-center py-16 px-6 text-white overflow-hidden">
+        {/* Animated Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0 animate-kenburns"
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/doctor_real_desk.jpg')` }}
+        />
         {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply z-1"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent z-2"></div>
         
         <div className="w-full max-w-4xl mx-auto space-y-4 relative z-10 text-left">
           {/* Breadcrumbs */}
@@ -36,13 +41,16 @@ export default function AboutDoctor() {
           
           {/* Portrait Image */}
           <ScrollReveal>
-            <div className="w-full">
+            <div className="w-full overflow-hidden rounded-2xl border border-primary/10 shadow-soft">
               <motion.img 
                 src={`${import.meta.env.BASE_URL}images/doctor_real_desk.jpg`} 
                 alt="Dr. Vinay Gulati at clinical desk" 
-                className="w-full h-[320px] sm:h-[450px] object-cover object-[center_15%] rounded-2xl shadow-soft border border-primary/10"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.4, ease: easing.easeOutCubic }}
+                className="w-full h-[320px] sm:h-[450px] object-cover object-[center_15%]"
+                initial={{ opacity: 0, scale: 1.08 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.8, ease: easing.easeOutExpo }}
               />
             </div>
           </ScrollReveal>

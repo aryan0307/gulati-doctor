@@ -3,7 +3,6 @@ import { NavLink, Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, 
-  Clock, 
   Phone, 
   Menu, 
   X, 
@@ -76,38 +75,28 @@ export default function Header() {
   return (
     <>
       {/* Top Thin Info Bar (Desktop only, scrolls away naturally) */}
-      <motion.div 
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: easing.easeOutCubic }}
+      <div 
         className="hidden lg:flex bg-primary text-white text-xs py-2 px-6 justify-between items-center gap-2 font-sans border-b border-primary-dark w-full"
       >
         <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-center sm:text-left">
           <div className="flex items-center gap-1.5 justify-center">
             <MapPin className="w-3.5 h-3.5 text-accent" />
-            <span>Near Suvi Eye Hospital, Talwandi, Kota</span>
+            <span>4W15, Sector - 4, Talwandi, Kota</span>
           </div>
-          <div className="flex items-center gap-1.5 justify-center">
-            <Clock className="w-3.5 h-3.5 text-accent" />
-            <span>Mon - Sat: 8:00 AM - 8:00 PM</span>
-          </div>
+
         </div>
-        <motion.a 
+        <a 
           href="tel:+917737465987" 
-          whileHover={{ y: -1 }}
           className="flex items-center gap-1.5 font-semibold text-white hover:text-accent transition-all duration-200"
           aria-label="Call clinic at +91 77374 65987"
         >
           <Phone className="w-3.5 h-3.5 text-accent" />
           <span>+91 77374 65987</span>
-        </motion.a>
-      </motion.div>
+        </a>
+      </div>
 
       {/* Main Sticky Header */}
-      <motion.header 
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: easing.easeOutCubic, delay: 0.1 }}
+      <header 
         className={`sticky top-0 w-full z-40 bg-white transition-all duration-300 ${
           isScrolled ? 'shadow-md border-b border-primary/5 py-3' : 'py-5'
         }`}
@@ -115,17 +104,15 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 group">
-            <motion.div 
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.2, ease: easing.easeOutCubic }}
-              className="p-1 bg-white rounded-xl border border-primary/10 shadow-sm transition-all duration-300"
+            <div 
+              className="p-1 bg-white rounded-xl border border-primary/10 shadow-sm transition-all duration-300 group-hover:scale-105"
             >
               <img 
                 src={`${import.meta.env.BASE_URL}images/clinic_logo.png`} 
                 alt="Gulati Physiotherapy Logo" 
                 className="w-10 h-10 object-contain" 
               />
-            </motion.div>
+            </div>
             <div className="text-left">
               <span className="font-serif font-extrabold text-lg md:text-xl tracking-tight text-primary-darker block leading-none">
                 GULATI PHYSIOTHERAPY
@@ -425,7 +412,7 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
     </>
   );
 }

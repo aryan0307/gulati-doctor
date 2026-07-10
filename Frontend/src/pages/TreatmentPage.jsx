@@ -3,7 +3,7 @@ import { Link, useParams, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ChevronRight, CheckCircle, Clock, ArrowRight, Phone } from 'lucide-react';
 import { treatments } from '../data/treatments';
-import { ScrollReveal, variants, easing } from '../lib/motion';
+import { ScrollReveal, easing } from '../lib/motion';
 
 export default function TreatmentPage() {
   const { slug } = useParams();
@@ -27,28 +27,31 @@ export default function TreatmentPage() {
     <div className="bg-brand-bg min-h-screen font-sans text-text-main">
       
       {/* PAGE TITLE BANNER */}
-      <ScrollReveal variant="fadeIn">
-        <section className="relative min-h-[380px] md:min-h-[420px] flex items-center bg-cover bg-center py-16 px-6 text-white overflow-hidden" style={{ backgroundImage: `url('${import.meta.env.BASE_URL}images/rehab_exercise.png')` }}>
-          {/* Dark Overlay */}
-          <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent"></div>
+      <section className="relative min-h-[380px] md:min-h-[420px] flex items-center py-16 px-6 text-white overflow-hidden">
+        {/* Animated Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center z-0 animate-kenburns"
+          style={{ backgroundImage: `url('${import.meta.env.BASE_URL}${treatment.image}')` }}
+        />
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-primary-darker/70 mix-blend-multiply z-1"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary-darker/90 via-primary-darker/40 to-transparent z-2"></div>
+        
+        <div className="w-full max-w-4xl mx-auto space-y-4 relative z-10 text-left">
+          {/* Breadcrumbs */}
+          <nav className="flex items-center gap-1.5 text-xs text-teal-200 font-medium flex-wrap">
+            <Link to="/" className="hover:text-white transition">Home</Link>
+            <ChevronRight className="w-3 h-3 text-teal-200/50" />
+            <span className="text-teal-200">Treatments</span>
+            <ChevronRight className="w-3 h-3 text-teal-200/50" />
+            <span className="text-white font-semibold">{treatment.shortTitle || treatment.title}</span>
+          </nav>
           
-          <div className="w-full max-w-4xl mx-auto space-y-4 relative z-10 text-left">
-            {/* Breadcrumbs */}
-            <nav className="flex items-center gap-1.5 text-xs text-teal-200 font-medium flex-wrap">
-              <Link to="/" className="hover:text-white transition">Home</Link>
-              <ChevronRight className="w-3 h-3 text-teal-200/50" />
-              <span className="text-teal-200">Treatments</span>
-              <ChevronRight className="w-3 h-3 text-teal-200/50" />
-              <span className="text-white font-semibold">{treatment.shortTitle || treatment.title}</span>
-            </nav>
-            
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
-              {treatment.title}
-            </h1>
-          </div>
-        </section>
-      </ScrollReveal>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold text-white tracking-tight leading-tight">
+            {treatment.title}
+          </h1>
+        </div>
+      </section>
 
       {/* MAIN CONTENT */}
       <section className="py-16 md:py-24 px-6 bg-brand-bg">
@@ -180,28 +183,44 @@ export default function TreatmentPage() {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
                   {related.map((r, idx) => (
-                  <motion.div
+                    <motion.div
                       key={r.slug}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.5, ease: easing.easeOutCubic, delay: idx * 0.1 }}
-                  >
-                    <Link
-                        to={`/treatments/${r.slug}`}
-                        className="group bg-white rounded-xl border border-primary/5 shadow-soft p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 space-y-3"
+                      className="h-full"
                     >
-                      <h4 className="font-serif font-bold text-sm md:text-base text-primary-darker group-hover:text-primary transition-colors">
-                        {r.name}
-                      </h4>
-                      <p className="text-xs text-text-secondary leading-relaxed line-clamp-2">
-                        {r.shortDescription}
-                      </p>
-                      <span className="inline-flex items-center gap-1 text-xs font-bold text-primary">
-                        Learn More <ArrowRight className="w-3 h-3" />
-                      </span>
-                    </Link>
-                  </motion.div>
+                      <Link
+                        to={`/treatments/${r.slug}`}
+                        className="group bg-white rounded-xl border border-primary/5 shadow-soft hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden flex flex-col justify-between h-full text-left"
+                      >
+                        <div>
+                          {/* Image Container */}
+                          <div className="relative h-32 w-full overflow-hidden bg-teal-50/30 border-b border-primary/5">
+                            <img
+                              src={`${import.meta.env.BASE_URL}${r.image}`}
+                              alt={r.name}
+                              className={`w-full h-full object-cover ${r.align || 'object-[center_15%]'} group-hover:scale-105 transition-transform duration-500`}
+                            />
+                          </div>
+                          {/* Content */}
+                          <div className="p-4 space-y-1">
+                            <h4 className="font-serif font-bold text-sm md:text-base text-primary-darker group-hover:text-primary transition-colors line-clamp-1">
+                              {r.name}
+                            </h4>
+                            <p className="text-[11px] text-text-secondary leading-relaxed line-clamp-2">
+                              {r.shortDescription}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="px-4 pb-4 pt-1">
+                          <span className="inline-flex items-center gap-1 text-[11px] font-bold text-primary">
+                            Learn More <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                          </span>
+                        </div>
+                      </Link>
+                    </motion.div>
                   ))}
                 </div>
               </div>

@@ -107,6 +107,12 @@ export default function Footer() {
               <Link to="/gallery" className="hover:text-accent transition duration-200">Gallery</Link>
             </li>
             <li>
+              <Link to="/patient-guidelines" className="hover:text-accent transition duration-200">Patient Guidelines</Link>
+            </li>
+            <li>
+              <Link to="/warranties-guarantees" className="hover:text-accent transition duration-200">Warranties & Guarantees</Link>
+            </li>
+            <li>
               <Link to="/contact" className="hover:text-accent transition duration-200">Contact</Link>
             </li>
           </ul>
@@ -132,7 +138,7 @@ export default function Footer() {
           <ul className="space-y-4 text-sm text-teal-200/90">
             <li className="flex gap-2.5 items-start">
               <MapPin className="w-4 h-4 text-accent shrink-0 mt-1" />
-              <span>Near Suvi Eye Hospital, Talwandi, Kota, Rajasthan - 324005</span>
+              <span>4W15, Sector - 4, Talwandi, Kota, Rajasthan 324005</span>
             </li>
             <li className="flex gap-2.5 items-center">
               <Phone className="w-4 h-4 text-accent shrink-0" />
@@ -199,6 +205,8 @@ export default function Footer() {
           <Link to="/about-doctor" className="hover:text-accent transition">About</Link>
           <a href="/#treatments" className="hover:text-accent transition">Treatments</a>
           <Link to="/gallery" className="hover:text-accent transition">Gallery</Link>
+          <Link to="/patient-guidelines" className="hover:text-accent transition">Guidelines</Link>
+          <Link to="/warranties-guarantees" className="hover:text-accent transition">Warranties</Link>
           <Link to="/contact" className="hover:text-accent transition">Contact</Link>
         </div>
       </div>

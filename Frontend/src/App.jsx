@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import FloatingContactBox from './components/FloatingContactBox';
@@ -20,21 +20,14 @@ import NotFound from './pages/NotFound';
 
 // Smooth scrolling with Lenis
 function SmoothScroll() {
-  const lenisRef = useRef(null);
-
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 0.9,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
       direction: 'vertical',
       gestureDirection: 'vertical',
       smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
     });
-
-    lenisRef.current = lenis;
 
     function raf(time) {
       lenis.raf(time);
@@ -54,19 +47,9 @@ function SmoothScroll() {
 // Scroll to top helper on navigation
 function ScrollToTop() {
   const { pathname } = useLocation();
-  const lenisRef = useRef(null);
   
   useEffect(() => {
-    // Try to use lenis for smooth scroll, fallback to native
-    const scrollToTop = () => {
-      if (lenisRef.current) {
-        lenisRef.current.scrollTo(0, { immediate: true });
-      } else {
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-      }
-    };
-    
-    scrollToTop();
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [pathname]);
 
   return null;
